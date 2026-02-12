@@ -7,6 +7,7 @@ from Bennett_functionality import *
 
 
 class BennettWindow:
+
     def __init__(self):
         ##################1st layer#################################
         self.main_window = tk.Tk()
@@ -56,16 +57,6 @@ class BennettWindow:
             command = self.open_window_menu
         )
         self.button_windows.grid(row=0, column=2, padx=0, pady=0)
-
-        self.button_asm = tk.Button(
-            self.button_frame,
-            text="Compile",
-            bg="white",
-            fg="black",
-            width=17,
-            command = self.open_assembly_menu
-        )
-        self.button_asm.grid(row=0, column=3, padx=0, pady=0)
         # ----------------------------------------------------------
 
         self.file_menu = tk.Menu(self.main_window, tearoff=0)
@@ -77,7 +68,6 @@ class BennettWindow:
         self.support_menu.add_command(label="How to code", command = self.how_to_code)
 
         self.window_menu = tk.Menu(self.main_window, tearoff=0)
-        self.window_menu.add_command(label="Terminal Window")
         self.window_menu.add_command(label="Command Window", command = self.command_window)
 
         self.asm_menu = tk.Menu(self.main_window, tearoff=0)
@@ -124,7 +114,8 @@ class BennettWindow:
             bg="white",
             fg="black",
             width=8,
-            height=2
+            height=2,
+            command = self.reset_simulator
         )
         self.button_reset.grid(row=0, column=2)
         ##################################################
@@ -307,13 +298,7 @@ class BennettWindow:
         y = self.button_windows.winfo_rooty() + self.button_windows.winfo_height()
         self.window_menu.post(x, y)
 
-    def open_assembly_menu(self):
-        x = self.button_asm.winfo_rootx()
-        y = self.button_asm.winfo_rooty() + self.button_asm.winfo_height()
-        self.asm_menu.post(x, y)
-
     ###############buttons functionality##############
-
 
     def open_file(self):
         file_path = filedialog.askopenfilename(
@@ -375,8 +360,8 @@ class BennettWindow:
         how_to_code_window.title("Guidelines")
         how_to_code_window.geometry("450x150")
         how_to_code_text = tk.Label(how_to_code_window,
-        text = ("To start coding, visit RISC-Vise website that provides tutorials, "
-        "documentation, and example projects relevant to your programming language or assignment. Explore the webpage "
+        text = ("To start coding, visit RISC-V website or Youtube that provide "
+        "documentation, and example projects relevant to your programming language or assignment. Explore Command Window as well, "
         "to understand coding concepts, syntax, and best practices. Try out the coding examples on your "
         "own system to reinforce your learning. Gradually, apply these concepts to create your own programs and "
         "experiments."
@@ -430,7 +415,7 @@ class BennettWindow:
             tree.insert("", "end", values=("Conditional Jump", "blt", "blt x1, x2, condition", "Condition that checks if x1 is less than x2"))
             tree.insert("", "end", values=("Conditional Jump", "bnez", "bnez x1, condition", "Condition that checks if x1 is not equal to 0"))
             tree.insert("", "end", values=("Conditional Jump", "beqz", "beqz x1, condition", "Condition that checks if x1 is equal to 0"))
-
+            tree.insert("","end", values=("Data Transfer","mv","mv x1,x2","x1 = x2","Instruction that copies(assigns) the value in second register into 1st register"))
 
     ######################ENGINE#####################################
     def run_simulation(self):
@@ -499,6 +484,26 @@ class BennettWindow:
                 break
 
             engine.pc += 1
+
+
+
+    def reset_simulator(self):
+
+        register_mapping = ["ra", "sp", "zero", "t0", "t1", "t2", "t3", "t4", "t5", "t6", "s0", "s1", "s2", "s3", "s4",
+                            "s5", "s6", "s7", "s8", "s9", "s10", "s11", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7",
+                            "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x12", "x13",
+                            "x14", "x15", "x16", "x17", "x18", "x19", "x20", "x21", "x22", "x23", "x24", "x25", "x26",
+                            "x27", "x28", "x29", "x30", "x31"]
+
+
+        for abi_id in self.table_ABI.get_children():
+            if self.table_ABI.item(abi_id)['values'][0] in register_mapping:
+                self.table_ABI.item(abi_id, values=(self.table_ABI.item(abi_id)['values'][0],"00000000","...."))
+
+        for rv_id in self.table_RV32.get_children():
+            if self.table_RV32.item(rv_id)['values'][0] in register_mapping:
+                self.table_RV32.item(rv_id, values=(self.table_RV32.item(rv_id)['values'][0],"00000000","...."))
+
 
     ######################################################################################################
 
