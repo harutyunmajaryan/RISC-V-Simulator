@@ -5,10 +5,17 @@ Key Feautes:
 1) Dual Register Visualization: Real-time updates for both x0-x31 hardware registers and their corresponding ABI names (zero, ra, sp, etc.).
 
 2) Instruction Support: Currently supports 22 core RISC-V instructions, including:
-    Arithmetic: add, addi, sub, subi
+    Arithmetic: add, addi, sub, subi, mul, muli
     Logical shifts: sll, sra, sla
     Control Flow: j, beq, bne, bge, ble
     Data/Pseudo: li, mv, defw, defb
 
 3) Interactive Code Editor: A built-in assembly editor with memory address mapping.
 4) Integrated Documentation: A built-in "Command Window" providing a quick-reference guide for RISC-V syntax and meanings.
+
+
+Future Improvements:
+
+-> Memory Implementation: Add a Data Memory (RAM) table for lw and sw instructions.
+-> Step Execution: Add a "Step" button to execute code one line at a time for easier debugging.
+-> Console Output: Implement an ecall system to print results to a virtual console.
