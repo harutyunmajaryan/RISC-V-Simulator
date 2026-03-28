@@ -1,4 +1,10 @@
 
+
+#Each function is meant to be seperate 
+#Each TYPE of function whether it is loading, storing, assigning or maybe immidiate instructions are seperated from each other and these are not AI written comments
+#First I initilized all registers (RV32 and ABI) as a set to map them later.
+#The brain of this simulator goes down below and are imported in CPU.py python file.
+
 class BennettFunctionality:
         def __init__(self,table_abi=None, table_rv32=None):
             self.registers = {f"x{i}": 0 for i in range(32)}
@@ -313,7 +319,7 @@ class BennettFunctionality:
 
 
 
-###################jump branch################################
+###################jump branch############################################
         def j_branch(self, line, all_lines):
             line = line.split(";")[0].strip()
             if not line:
@@ -798,4 +804,7 @@ class BennettFunctionality:
 
 
 #######################################################################################################################
+#Some instructions can be added later such as division or ecall functions.
+#TO add ecall functon a window should be created as demo version of terminal to see the output in terminal
+#Otherwise just use Linux terminal or windows powershell.
 
