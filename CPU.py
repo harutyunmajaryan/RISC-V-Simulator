@@ -5,11 +5,11 @@ from tkinter import messagebox
 import os
 from Bennett_functionality import *
 
-
+# The code below represents the GUI which is the visual window with registers, menus, buttons and code section
 class BennettWindow:
 
     def __init__(self):
-        ##################1st layer#################################
+        #1st layer goes here 
         self.main_window = tk.Tk()
         self.main_window_label = tk.Label(
             self.main_window,
@@ -27,7 +27,7 @@ class BennettWindow:
         self.button_frame = tk.Frame(self.main_window, bg="white", padx=1)
         self.button_frame.grid(row=1, column=0, columnspan=4, sticky="w", padx=0)
 
-        # ------------------- TOP MENU BUTTONS -------------------
+        #Here goes Menu sections and menu buttons 
         self.button_file = tk.Button(
             self.button_frame,
             text="File",
@@ -57,7 +57,7 @@ class BennettWindow:
             command = self.open_window_menu
         )
         self.button_windows.grid(row=0, column=2, padx=0, pady=0)
-        # ----------------------------------------------------------
+       
 
         self.file_menu = tk.Menu(self.main_window, tearoff=0)
         self.file_menu.add_command(label="Open",command=self.open_file)
@@ -74,7 +74,7 @@ class BennettWindow:
         self.asm_menu.add_command(label="Assemble File")
 
 
-        ###############2nd layer: horizontal frame for buttons ########################
+        #2nd layer goes here(horizontal buttons and layers)
         self.button_frame2 = tk.Frame(
             self.main_window,
             bg="white",
@@ -145,7 +145,7 @@ class BennettWindow:
         ##################################################
 
 
-        ##################table for registers###########################
+        #table for registers
         columns = ("Register(ABI)", "Value", "ASCII")
         self.table_ABI = ttk.Treeview(self.button_frame3, columns=columns, show="headings")
 
@@ -261,7 +261,7 @@ class BennettWindow:
         self.table_RV32.pack(side="left", fill="both", expand=True)
         #####################################################
 
-        ###############code window########################
+        #here is created a window to let users to write a code inside the winfow instead of opening a terminal shell
         self.code_frame = tk.Frame(
             self.main_window,
             bg="#f0f0f0",
@@ -417,7 +417,7 @@ class BennettWindow:
             tree.insert("", "end", values=("Conditional Jump", "beqz", "beqz x1, condition", "Condition that checks if x1 is equal to 0"))
             tree.insert("","end", values=("Data Transfer","mv","mv x1,x2","x1 = x2","Instruction that copies(assigns) the value in second register into 1st register"))
 
-    ######################ENGINE#####################################
+    ####ENGINE####
     def run_simulation(self):
         text_data = self.code_content.get("1.0", "end-1c")
         lines = text_data.splitlines()
@@ -506,8 +506,6 @@ class BennettWindow:
 
 
     ######################################################################################################
-
-
 
 
 
