@@ -4,7 +4,7 @@ Unlike traditional command-line simulators, Bennett provides a dual-view of regi
 Key Feautes:
 1) Dual Register Visualization: Real-time updates for both x0-x31 hardware registers and their corresponding ABI names (zero, ra, sp, etc.).
 
-2) Instruction Support: Currently supports 22 core RISC-V instructions, including:
+2) Instruction Support: Currently supports 25 core RISC-V instructions, including:
     Arithmetic: add, addi, sub, subi, mul, muli
     Logical shifts: sll, sra, sla
     Control Flow: j, beq, bne, bge, ble
