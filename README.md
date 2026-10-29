@@ -32,7 +32,7 @@ Bennett helps students and developers see how the CPU state changes in real time
 ```bash
 git clone https://github.com/harutyunmajaryan/RISC-V-Simulator.git
 cd RISC-V-Simulator
-python main.py
+python3 CPU.py
 ```
 
 ## Future improvements
